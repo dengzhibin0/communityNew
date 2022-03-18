@@ -21,7 +21,6 @@ public class AlphaService {
     @Autowired
     private AlphaDao alphaDao;
 
-
 //    public AlphaService(){
 //        System.out.println("实例化AlphaService");
 //    }
