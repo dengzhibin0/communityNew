@@ -51,4 +51,10 @@ public class HomeController {
         model.addAttribute("discussPosts",discussPosts);  // ***键值对***
         return "/index";
     }
+
+    // 用户手动请求错误页面
+    @RequestMapping(path = "/error",method = RequestMethod.GET)
+    public String getErrorPage(){
+        return "/error/500";
+    }
 }
