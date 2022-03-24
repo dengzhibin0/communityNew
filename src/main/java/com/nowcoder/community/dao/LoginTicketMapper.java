@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Mapper
+@Deprecated
 public interface LoginTicketMapper {
 
     @Insert({
