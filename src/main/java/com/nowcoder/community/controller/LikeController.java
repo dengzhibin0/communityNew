@@ -1,8 +1,5 @@
 package com.nowcoder.community.controller;
 
-import com.nowcoder.community.annotation.LoginRequired;
-import com.nowcoder.community.entity.Comment;
-import com.nowcoder.community.entity.DiscussPost;
 import com.nowcoder.community.entity.Event;
 import com.nowcoder.community.entity.User;
 import com.nowcoder.community.event.EventProducer;
@@ -32,7 +29,6 @@ public class LikeController implements CommunityConstant {
 
     @RequestMapping(path = "/like", method = RequestMethod.POST)
     @ResponseBody
-    @LoginRequired
     public String like(int entityType, int entityId, int entityUserId,int postId) {
         User user = hostHolder.getUser();
 

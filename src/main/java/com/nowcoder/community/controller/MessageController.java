@@ -1,7 +1,6 @@
 package com.nowcoder.community.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.nowcoder.community.entity.Comment;
 import com.nowcoder.community.entity.Message;
 import com.nowcoder.community.entity.Page;
 import com.nowcoder.community.entity.User;

@@ -1,6 +1,5 @@
 package com.nowcoder.community.controller;
 
-import com.nowcoder.community.annotation.LoginRequired;
 import com.nowcoder.community.entity.*;
 import com.nowcoder.community.event.EventProducer;
 import com.nowcoder.community.service.FollowService;
@@ -37,7 +36,6 @@ public class FollowController implements CommunityConstant {
     // 关注
     @RequestMapping(path = "/follow", method = RequestMethod.POST)
     @ResponseBody
-    @LoginRequired
     public String follow(int entityType, int entityId) {
         User user = hostHolder.getUser();
         followService.follow(user.getId(), entityType, entityId);
@@ -55,7 +53,6 @@ public class FollowController implements CommunityConstant {
     // 取关
     @RequestMapping(path = "/unfollow", method = RequestMethod.POST)
     @ResponseBody
-    @LoginRequired
     public String unfollow(int entityType, int entityId) {
         User user = hostHolder.getUser();
         followService.unfollow(user.getId(), entityType, entityId);

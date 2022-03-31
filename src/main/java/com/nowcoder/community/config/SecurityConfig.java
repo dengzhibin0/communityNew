@@ -7,11 +7,9 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.access.AccessDeniedHandler;
-import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -29,6 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements Comm
     // 授权
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable();  // 禁用csrf
         // 授权相关的配置
         // accessDeniedPage：没权限的时候访问什么页面
         // anyRequest().permitAll():其他请求都可以访问
@@ -36,18 +35,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements Comm
                 .antMatchers("/user/setting",
                         "/user/upload",
                         "/user/updatePassword",
+                        "/discuss/add",
                         "/comment/add/**",
                         "/letter/**",
                         "/notice/**",
-                        "/like/**",
+                        "/like",
                         "/follow",
                         "/unfollow")
                 .hasAnyAuthority(
                         AUTHORITY_USER,
                         AUTHORITY_ADMIN,
                         AUTHORITY_MODERATOR)
-                .anyRequest().permitAll()
-        .and().csrf().disable(); // 禁用csrf
+                .anyRequest().permitAll();
 
         // accessDeniedHandler:权限不够时的处理
         // authenticationEntryPoint:没有登录时的处理

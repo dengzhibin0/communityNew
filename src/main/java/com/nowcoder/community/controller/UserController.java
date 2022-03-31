@@ -115,7 +115,7 @@ public class UserController implements CommunityConstant {
     }
 
     // 修改密码
-    @LoginRequired
+//    @LoginRequired
     @RequestMapping(path = "/updatePassword", method = RequestMethod.POST)
     public String updatePassword(String oldPassword, String newPassword, Model model) {
         User user = hostHolder.getUser();

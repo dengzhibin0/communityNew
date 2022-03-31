@@ -6,8 +6,6 @@ import com.nowcoder.community.service.UserService;
 import com.nowcoder.community.util.CookieUtil;
 import com.nowcoder.community.util.HostHolder;
 import org.springframework.security.core.Authentication;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 
+@Deprecated
 @Component
 public class LoginTicketInterceptor implements HandlerInterceptor {
     @Autowired
@@ -27,8 +26,6 @@ public class LoginTicketInterceptor implements HandlerInterceptor {
 
     @Autowired
     private HostHolder hostHolder;
-
-    private static final Logger logger = LoggerFactory.getLogger(LoginTicketInterceptor.class);
 
     // 在Controller之前执行
     @Override
