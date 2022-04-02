@@ -11,7 +11,9 @@ import com.nowcoder.community.service.UserService;
 import com.nowcoder.community.util.CommunityConstant;
 import com.nowcoder.community.util.CommunityUtil;
 import com.nowcoder.community.util.HostHolder;
+import com.nowcoder.community.util.RedisKeyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,6 +41,9 @@ public class DiscussPostController implements CommunityConstant {
     @Autowired
     private LikeService likeService;
 
+    @Autowired
+    private RedisTemplate redisTemplate;
+
 //    @RequestMapping(path = "/add", method = RequestMethod.GET)
 //    @ResponseBody
 //    public String addDiscussPost() {
@@ -60,6 +65,10 @@ public class DiscussPostController implements CommunityConstant {
         post.setContent(content);
         post.setCreateTime(new Date());
         discussPostService.addDiscussPost(post);
+
+        // 计算帖子分数
+        String redisKey = RedisKeyUtil.getPostScoreKey();
+        redisTemplate.opsForSet().add(redisKey, post.getId());
 
         // 报错的情况之后统一处理
         // TODO
@@ -166,6 +175,9 @@ public class DiscussPostController implements CommunityConstant {
     @ResponseBody
     public String setWonderful(int id){
         discussPostService.updateStatus(id,1);
+        // 计算帖子分数
+        String redisKey = RedisKeyUtil.getPostScoreKey();
+        redisTemplate.opsForSet().add(redisKey, id);
         return CommunityUtil.getJSONString(0);
     }
 

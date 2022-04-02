@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.xml.ws.soap.Addressing;
+//import javax.xml.ws.soap.Addressing;
 import java.util.Random;
 import java.util.concurrent.BlockingQueue;
 
